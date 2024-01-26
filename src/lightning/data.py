@@ -32,6 +32,7 @@ class MultiSceneDataModule(pl.LightningDataModule):
     """ 
     For distributed training, each training process is assgined
     only a part of the training scenes to reduce memory overhead.
+    对于分布式训练，每个训练过程仅与训练场景的一部分关联，以减少内存开销。
     """
     def __init__(self, args, config):
         super().__init__()

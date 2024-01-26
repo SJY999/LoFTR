@@ -5,7 +5,11 @@ import torch
 def warp_kpts(kpts0, depth0, depth1, T_0to1, K0, K1):
     """ Warp kpts0 from I0 to I1 with depth, K and Rt
     Also check covisibility and depth consistency.
-    Depth is consistent if relative error < 0.2 (hard-coded).
+    Depth is consistent if relative error < 0.2 (hard-coded).  使用深度K和Rt将kpts0从I0扭曲到I1
+
+同时检查共视性和深度一致性。
+
+如果相对误差<0.2（硬编码），则深度一致。
     
     Args:
         kpts0 (torch.Tensor): [N, L, 2] - <x, y>,

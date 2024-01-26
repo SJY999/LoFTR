@@ -18,7 +18,7 @@ class PositionEncodingSine(nn.Module):
                 We will remove the buggy impl after re-training all variants of our released models.
         """
         super().__init__()
-
+        
         pe = torch.zeros((d_model, *max_shape))
         y_position = torch.ones(max_shape).cumsum(0).float().unsqueeze(0)
         x_position = torch.ones(max_shape).cumsum(1).float().unsqueeze(0)
@@ -31,12 +31,50 @@ class PositionEncodingSine(nn.Module):
         pe[1::4, :, :] = torch.cos(x_position * div_term)
         pe[2::4, :, :] = torch.sin(y_position * div_term)
         pe[3::4, :, :] = torch.cos(y_position * div_term)
-
+        # print('x:',x_position)
+        print("pe",pe.shape)
         self.register_buffer('pe', pe.unsqueeze(0), persistent=False)  # [1, C, H, W]
 
-    def forward(self, x):
+    def forward(self, x,xmf,ymf):
         """
         Args:
             x: [N, C, H, W]
         """
-        return x + self.pe[:, :, :x.size(2), :x.size(3)]
+        # print('x:',x.size(2),x.size(3)) #6080
+        # print("x",x.shape) #x torch.Size([1, 256, 60, 80])  60 80 是啥？
+        # print('pe.shape',self.pe)
+        # print('pe.size',self.pe.size)
+        length=256
+
+        
+        # method 1
+        y0 = x.size(2)-int(ymf)
+        y1 = 2*x.size(2)-int(ymf)
+        x0 = x.size(3)-int(xmf)
+        x1 = 2*x.size(3)-int(xmf)
+        return x + self.pe[:,:,y0:y1,x0:x1]
+        print('y0y1x0x1',y0,y1,x0,x1)
+
+
+        # method2
+        # y0 = (length-int(ymf))% length
+        # y1 = (length+x.size(2)-int(ymf))% length
+        # x0 = (length-int(xmf))% length
+        # x1 = (length+x.size(3)-int(xmf))% length
+
+        # if y0 < y1:
+        #     if x0 < x1:
+        #         return x + self.pe[:, :, y0:y1, x0:x1]
+        #     else:
+        #         x_slice = torch.cat([self.pe[:, :, y0:y1, x0:], self.pe[:, :, y0:y1, :x1]], dim=3)
+        #         return x + x_slice
+        # else:
+        #     if x0 < x1:
+        #         y_slice = torch.cat([self.pe[:, :, y0:, x0:x1], self.pe[:, :, :y1, x0:x1]], dim=2)
+        #         return x + y_slice
+        #     else:
+        #         y_slice = torch.cat([torch.cat([self.pe[:, :, y0:, x0:], self.pe[:, :, :y1, x0:]], dim=2),torch.cat([self.pe[:, :, y0:, :x1], self.pe[:, :, :y1, :x1]], dim=2)],dim=3)
+        #         return x + y_slice
+
+        # loftr
+        # return x + self.pe[:, :, :x.size(2),: x.size(3)]

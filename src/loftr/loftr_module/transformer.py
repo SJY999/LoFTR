@@ -69,7 +69,7 @@ class LocalFeatureTransformer(nn.Module):
         self.nhead = config['nhead']
         self.layer_names = config['layer_names']
         encoder_layer = LoFTREncoderLayer(config['d_model'], config['nhead'], config['attention'])
-        self.layers = nn.ModuleList([copy.deepcopy(encoder_layer) for _ in range(len(self.layer_names))])
+        self.layers = nn.ModuleList([copy.deepcopy(encoder_layer) for _ in range(len(self.layer_names))])  #将复制对象完全复制一边，并作为一个独立的新个体单元存在。即使改变被复制对象，deepcopy新个体也不会发生变化
         self._reset_parameters()
 
     def _reset_parameters(self):
@@ -88,7 +88,7 @@ class LocalFeatureTransformer(nn.Module):
 
         assert self.d_model == feat0.size(2), "the feature number of src and transformer must be equal"
 
-        for layer, name in zip(self.layers, self.layer_names):
+        for layer, name in zip(self.layers, self.layer_names): #zip按列打印
             if name == 'self':
                 feat0 = layer(feat0, feat0, mask0, mask0)
                 feat1 = layer(feat1, feat1, mask1, mask1)

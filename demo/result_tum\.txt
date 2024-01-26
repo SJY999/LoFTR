@@ -1,0 +1,242 @@
+loftr-matches_20_lof_t_freiburg1_desk.mp4
+91  92  1  55  242  138  156  181  119  1  6  100  160  104  24  32  54  7  28  10  46  144  191  112  80  89  107  317  651  1419  
+4757
+loftr-matches_15_lof_t_freiburg1_desk.mp4
+248  270  35  9  191  106  585  244  451  317  191  165  93  1  182  212  219  347  71  47  81  128  94  6  27  52  59  103  299  304  165  183  197  320  219  272  440  845  1014  1608  
+10400
+loftr-matches_25_lof_t_freiburg1_desk.mp4
+46  0  60  76  48  49  37  2  3  82  306  12  14  8  1  4  33  99  60  91  39  87  334  1400  
+2891
+loftr-matches_30_lof_t_freiburg1_desk.mp4
+55  0  8  83  17  59  1  66  106  9  3  2  14  13  53  38  92  11  110  1184  
+1924
+loftr-matches_20_our_t_freiburg1_desk.mp4
+105  102  1  54  261  142  152  186  125  0  4  113  174  120  25  32  49  6  26  14  38  143  192  128  91  104  126  340  681  1476  
+sum:5010
+loftr-matches_15_our_t_freiburg1_desk.mp4
+284  314  39  10  217  99  617  254  444  342  192  175  99  1  204  223  232  386  76  52  80  145  80  7  25  51  53  106  314  301  160  200  225  335  251  296  457  928  1051  1682  
+sum:11007
+loftr-matches_25_our_t_freiburg1_desk.mp4
+58  1  67  62  42  61  36  0  4  85  313  11  14  8  1  4  34  96  63  106  41  82  344  1461  
+sum:2994
+loftr-matches_30_our_t_freiburg1_desk.mp4
+61  0  8  86  16  57  1  63  115  7  3  1  17  11  55  39  97  16  133  1237  
+sum:2023
+loftr-matches_20_our__freiburg1_desk2.mp4
+250  101  1  0  16  1  7  51  2  9  15  10  324  287  7  61  3  30  2  0  3  33  0  105  87  92  26  117  147  9  1173  
+sum:2969
+loftr-matches_15_our__freiburg1_desk2.mp4
+208  105  34  0  1  27  52  6  24  58  34  23  41  149  57  330  477  286  60  30  191  45  75  62  15  1  2  15  26  106  4  341  207  338  47  139  249  31  136  98  1079  1453  
+sum:6662
+loftr-matches_25_our__freiburg1_desk2.mp4
+241  4  2  1  0  1  0  4  36  180  329  6  10  1  5  1  0  381  0  65  77  36  15  0  1221  
+sum:2616
+loftr-matches_30_our__freiburg1_desk2.mp4
+153  1  0  0  2  1  1  13  89  2  4  1  0  0  146  1  60  4  4  1  1162  
+sum:1645
+loftr-matches_20_lof__freiburg1_desk2.mp4
+242  98  1  0  13  2  6  54  1  6  13  10  320  269  4  61  5  33  2  0  4  29  1  88  87  75  22  110  154  13  1132  
+sum:2855
+loftr-matches_15_lof__freiburg1_desk2.mp4
+214  76  30  0  0  23  45  11  25  53  36  28  49  123  43  316  445  294  64  26  193  50  74  71  16  1  3  10  26  99  4  310  185  305  40  131  229  32  144  91  1039  1408  
+sum:6362
+loftr-matches_25_lof__freiburg1_desk2.mp4
+236  4  2  0  3  2  0  2  31  170  331  6  9  2  5  3  0  337  1  63  62  31  19  1  1173  
+sum:2493
+loftr-matches_30_lof__freiburg1_desk2.mp4
+123  0  0  0  1  1  3  12  94  1  3  3  0  0  137  1  51  6  5  1  1139  
+sum:1581
+loftr-matches_20_lof_et_freiburg1_360.mp4
+7  0  195  3  33  163  0  142  8  5  7  2  128  47  27  59  43  47  8  17  91  0  232  3  5  0  4  28  44  35  6  0  84  0  35  28  85  
+sum:1621
+loftr-matches_15_lof_et_freiburg1_360.mp4
+57  1  0  134  6  239  175  130  17  115  51  71  45  248  1  26  111  207  69  76  35  10  59  16  46  92  76  43  46  22  19  65  10  3  35  10  82  11  235  122  45  30  7  137  6  125  41  24  141  774  
+sum:4146
+loftr-matches_25_lof_et_freiburg1_360.mp4
+17  0  0  16  14  0  2  0  0  0  120  0  1  1  0  11  9  0  0  0  0  3  2  13  6  0  0  0  15  133  
+sum:363
+loftr-matches_30_lof_et_freiburg1_360.mp4
+1  1  0  297  0  0  9  0  128  1  0  35  0  194  0  0  79  0  13  7  0  2  0  61  37  
+sum:865
+loftr-matches_20_our_et_freiburg1_360.mp4
+8  0  219  3  52  189  0  201  9  9  12  0  150  50  28  59  42  49  6  18  108  0  245  1  6  0  5  35  43  44  6  0  96  0  51  38  102  
+sum:1884
+loftr-matches_15_our_et_freiburg1_360.mp4
+64  1  0  149  5  245  196  158  16  122  74  75  55  257  1  28  113  234  76  79  41  8  63  28  39  106  76  57  45  19  21  59  6  5  32  7  85  10  225  127  72  32  8  180  11  129  59  39  155  835  
+sum:4527
+loftr-matches_25_our_et_freiburg1_360.mp4
+17  0  0  22  17  0  4  0  0  0  142  0  1  2  0  12  17  0  0  0  0  1  3  15  8  0  0  0  17  155  
+sum:433
+loftr-matches_30_our_et_freiburg1_360.mp4
+0  loftr-matches_30_our_et_freiburg1_360.mp4
+0  loftr-matches_30_our_et_freiburg1_360.mp4
+0  loftr-matches_20_our__freiburg1_desk2.mp4
+250  101  1  0  16  1  7  51  2  9  15  10  324  287  7  61  3  30  2  0  3  33  0  105  87  92  26  117  147  9  1173  
+sum:2969
+loftr-matches_15_our__freiburg1_desk2.mp4
+208  105  34  0  1  27  52  6  24  58  34  23  41  149  57  330  477  286  60  30  191  45  75  62  15  1  2  15  26  106  4  341  207  338  47  139  249  31  136  98  1079  1453  
+sum:6662
+loftr-matches_25_our__freiburg1_desk2.mp4
+241  4  2  1  0  1  0  4  36  180  329  6  10  1  5  1  0  381  0  65  77  36  15  0  1221  
+sum:2616
+loftr-matches_30_our__freiburg1_desk2.mp4
+153  1  0  0  2  1  1  13  89  2  4  1  0  0  146  1  60  4  4  1  1162  
+sum:1645
+loftr-matches_20_lof__freiburg1_desk2.mp4
+242  98  1  0  13  2  6  54  1  6  13  10  320  269  4  61  5  33  2  0  4  29  1  88  87  75  22  110  154  13  1132  
+sum:2855
+loftr-matches_15_lof__freiburg1_desk2.mp4
+214  76  30  0  0  23  45  11  25  53  36  28  49  123  43  316  445  294  64  26  193  50  74  71  16  1  3  10  26  99  4  310  185  305  40  131  229  32  144  91  1039  1408  
+sum:6362
+loftr-matches_25_lof__freiburg1_desk2.mp4
+236  4  2  0  3  2  0  2  31  170  331  6  9  2  5  3  0  337  1  63  62  31  19  1  1173  
+sum:2493
+loftr-matches_30_lof__freiburg1_desk2.mp4
+123  0  0  0  1  1  3  12  94  1  3  3  0  0  137  1  51  6  5  1  1139  
+sum:1581
+loftr-matches_20_our__freiburg1_desk2.mp4
+loftr-matches_20_our__freiburg1_desk2.mp4
+loftr-matches_20_our__freiburg1_desk2.mp4
+loftr-matches_20_our__freiburg1_desk2.mp4
+loftr-matches_20_our__freiburg1_desk2.mp4
+loftr-matches_20_our__freiburg1_desk2.mp4
+loftr-matches_20_our__freiburg1_desk2.mp4
+loftr-matches_20_our__freiburg1_desk2.mp4
+loftr-matches_20_our__freiburg1_desk2.mp4
+loftr-matches_20_our__freiburg1_desk2.mp4
+loftr-matches_20_our__freiburg1_desk2.mp4
+loftr-matches_20_our__freiburg1_desk2.mp4
+loftr-matches_20_our__freiburg1_desk2.mp4
+loftr-matches_20_our__freiburg1_desk2.mp4
+245  102  1  0  15  1  6  51  2  9  12  11  323  288  7  61  3  30  2  0  3  33  0  106  87  92  26  117  147  9  1174  
+sum:2963
+loftr-matches_15_our__freiburg1_desk2.mp4
+212  105  34  0  2  27  52  6  24  58  34  23  41  149  57  330  477  287  61  31  191  45  75  62  15  1  2  15  26  106  4  341  206  338  47  139  248  31  136  94  1079  1453  
+sum:6664
+loftr-matches_25_our__freiburg1_desk2.mp4
+240  4  2  1  0  0  0  4  36  181  329  6  10  1  6  1  0  381  0  65  78  36  15  0  1223  
+sum:2619
+loftr-matches_30_our__freiburg1_desk2.mp4
+153  1  0  0  2  1  1  13  88  2  4  1  0  0  146  0  60  4  4  1  1163  
+sum:1644
+loftr-matches_20_lof_t_freiburg1_desk.mp4
+91  92  1  55  242  138  156  181  119  1  6  100  160  104  24  32  54  7  28  10  46  144  191  112  80  89  107  317  651  1419  
+4757
+loftr-matches_15_lof_t_freiburg1_desk.mp4
+248  270  35  9  191  106  585  244  451  317  191  165  93  1  182  212  219  347  71  47  81  128  94  6  27  52  59  103  299  304  165  183  197  320  219  272  440  845  1014  1608  
+10400
+loftr-matches_25_lof_t_freiburg1_desk.mp4
+46  0  60  76  48  49  37  2  3  82  306  12  14  8  1  4  33  99  60  91  39  87  334  1400  
+2891
+loftr-matches_30_lof_t_freiburg1_desk.mp4
+55  0  8  83  17  59  1  66  106  9  3  2  14  13  53  38  92  11  110  1184  
+1924
+loftr-matches_20_our_t_freiburg1_desk.mp4
+105  102  1  54  261  142  152  186  125  0  4  113  174  120  25  32  49  6  26  14  38  143  192  128  91  104  126  340  681  1476  
+sum:5010
+loftr-matches_15_our_t_freiburg1_desk.mp4
+284  314  39  10  217  99  617  254  444  342  192  175  99  1  204  223  232  386  76  52  80  145  80  7  25  51  53  106  314  301  160  200  225  335  251  296  457  928  1051  1682  
+sum:11007
+loftr-matches_25_our_t_freiburg1_desk.mp4
+58  1  67  62  42  61  36  0  4  85  313  11  14  8  1  4  34  96  63  106  41  82  344  1461  
+sum:2994
+loftr-matches_30_our_t_freiburg1_desk.mp4
+61  0  8  86  16  57  1  63  115  7  3  1  17  11  55  39  97  16  133  1237  
+sum:2023
+loftr-matches_20_our__freiburg1_desk2.mp4
+250  101  1  0  16  1  7  51  2  9  15  10  324  287  7  61  3  30  2  0  3  33  0  105  87  92  26  117  147  9  1173  
+sum:2969
+loftr-matches_15_our__freiburg1_desk2.mp4
+208  105  34  0  1  27  52  6  24  58  34  23  41  149  57  330  477  286  60  30  191  45  75  62  15  1  2  15  26  106  4  341  207  338  47  139  249  31  136  98  1079  1453  
+sum:6662
+loftr-matches_25_our__freiburg1_desk2.mp4
+241  4  2  1  0  1  0  4  36  180  329  6  10  1  5  1  0  381  0  65  77  36  15  0  1221  
+sum:2616
+loftr-matches_30_our__freiburg1_desk2.mp4
+153  1  0  0  2  1  1  13  89  2  4  1  0  0  146  1  60  4  4  1  1162  
+sum:1645
+loftr-matches_20_lof__freiburg1_desk2.mp4
+242  98  1  0  13  2  6  54  1  6  13  10  320  269  4  61  5  33  2  0  4  29  1  88  87  75  22  110  154  13  1132  
+sum:2855
+loftr-matches_15_lof__freiburg1_desk2.mp4
+214  76  30  0  0  23  45  11  25  53  36  28  49  123  43  316  445  294  64  26  193  50  74  71  16  1  3  10  26  99  4  310  185  305  40  131  229  32  144  91  1039  1408  
+sum:6362
+loftr-matches_25_lof__freiburg1_desk2.mp4
+236  4  2  0  3  2  0  2  31  170  331  6  9  2  5  3  0  337  1  63  62  31  19  1  1173  
+sum:2493
+loftr-matches_30_lof__freiburg1_desk2.mp4
+123  0  0  0  1  1  3  12  94  1  3  3  0  0  137  1  51  6  5  1  1139  
+sum:1581
+loftr-matches_20_lof_et_freiburg1_360.mp4
+7  0  195  3  33  163  0  142  8  5  7  2  128  47  27  59  43  47  8  17  91  0  232  3  5  0  4  28  44  35  6  0  84  0  35  28  85  
+sum:1621
+loftr-matches_15_lof_et_freiburg1_360.mp4
+57  1  0  134  6  239  175  130  17  115  51  71  45  248  1  26  111  207  69  76  35  10  59  16  46  92  76  43  46  22  19  65  10  3  35  10  82  11  235  122  45  30  7  137  6  125  41  24  141  774  
+sum:4146
+loftr-matches_25_lof_et_freiburg1_360.mp4
+17  0  0  16  14  0  2  0  0  0  120  0  1  1  0  11  9  0  0  0  0  3  2  13  6  0  0  0  15  133  
+sum:363
+loftr-matches_30_lof_et_freiburg1_360.mp4
+1  1  0  297  0  0  9  0  128  1  0  35  0  194  0  0  79  0  13  7  0  2  0  61  37  
+sum:865
+loftr-matches_20_our_et_freiburg1_360.mp4
+8  0  219  3  52  189  0  201  9  9  12  0  150  50  28  59  42  49  6  18  108  0  245  1  6  0  5  35  43  44  6  0  96  0  51  38  102  
+sum:1884
+loftr-matches_15_our_et_freiburg1_360.mp4
+64  1  0  149  5  245  196  158  16  122  74  75  55  257  1  28  113  234  76  79  41  8  63  28  39  106  76  57  45  19  21  59  6  5  32  7  85  10  225  127  72  32  8  180  11  129  59  39  155  835  
+sum:4527
+loftr-matches_25_our_et_freiburg1_360.mp4
+17  0  0  22  17  0  4  0  0  0  142  0  1  2  0  12  17  0  0  0  0  1  3  15  8  0  0  0  17  155  
+sum:433
+loftr-matches_30_our_et_freiburg1_360.mp4
+0  loftr-matches_30_our_et_freiburg1_360.mp4
+0  loftr-matches_30_our_et_freiburg1_360.mp4
+0  loftr-matches_20_our__freiburg1_desk2.mp4
+250  101  1  0  16  1  7  51  2  9  15  10  324  287  7  61  3  30  2  0  3  33  0  105  87  92  26  117  147  9  1173  
+sum:2969
+loftr-matches_15_our__freiburg1_desk2.mp4
+208  105  34  0  1  27  52  6  24  58  34  23  41  149  57  330  477  286  60  30  191  45  75  62  15  1  2  15  26  106  4  341  207  338  47  139  249  31  136  98  1079  1453  
+sum:6662
+loftr-matches_25_our__freiburg1_desk2.mp4
+241  4  2  1  0  1  0  4  36  180  329  6  10  1  5  1  0  381  0  65  77  36  15  0  1221  
+sum:2616
+loftr-matches_30_our__freiburg1_desk2.mp4
+153  1  0  0  2  1  1  13  89  2  4  1  0  0  146  1  60  4  4  1  1162  
+sum:1645
+loftr-matches_20_lof__freiburg1_desk2.mp4
+242  98  1  0  13  2  6  54  1  6  13  10  320  269  4  61  5  33  2  0  4  29  1  88  87  75  22  110  154  13  1132  
+sum:2855
+loftr-matches_15_lof__freiburg1_desk2.mp4
+214  76  30  0  0  23  45  11  25  53  36  28  49  123  43  316  445  294  64  26  193  50  74  71  16  1  3  10  26  99  4  310  185  305  40  131  229  32  144  91  1039  1408  
+sum:6362
+loftr-matches_25_lof__freiburg1_desk2.mp4
+236  4  2  0  3  2  0  2  31  170  331  6  9  2  5  3  0  337  1  63  62  31  19  1  1173  
+sum:2493
+loftr-matches_30_lof__freiburg1_desk2.mp4
+123  0  0  0  1  1  3  12  94  1  3  3  0  0  137  1  51  6  5  1  1139  
+sum:1581
+loftr-matches_20_our__freiburg1_desk2.mp4
+loftr-matches_20_our__freiburg1_desk2.mp4
+loftr-matches_20_our__freiburg1_desk2.mp4
+loftr-matches_20_our__freiburg1_desk2.mp4
+loftr-matches_20_our__freiburg1_desk2.mp4
+loftr-matches_20_our__freiburg1_desk2.mp4
+loftr-matches_20_our__freiburg1_desk2.mp4
+loftr-matches_20_our__freiburg1_desk2.mp4
+loftr-matches_20_our__freiburg1_desk2.mp4
+loftr-matches_20_our__freiburg1_desk2.mp4
+loftr-matches_20_our__freiburg1_desk2.mp4
+loftr-matches_20_our__freiburg1_desk2.mp4
+loftr-matches_20_our__freiburg1_desk2.mp4
+loftr-matches_20_our__freiburg1_desk2.mp4
+245  102  1  0  15  1  6  51  2  9  12  11  323  288  7  61  3  30  2  0  3  33  0  106  87  92  26  117  147  9  1174  
+sum:2963
+loftr-matches_15_our__freiburg1_desk2.mp4
+212  105  34  0  2  27  52  6  24  58  34  23  41  149  57  330  477  287  61  31  191  45  75  62  15  1  2  15  26  106  4  341  206  338  47  139  248  31  136  94  1079  1453  
+sum:6664
+loftr-matches_25_our__freiburg1_desk2.mp4
+240  4  2  1  0  0  0  4  36  181  329  6  10  1  6  1  0  381  0  65  78  36  15  0  1223  
+sum:2619
+loftr-matches_30_our__freiburg1_desk2.mp4
+153  1  0  0  2  1  1  13  88  2  4  1  0  0  146  0  60  4  4  1  1163  
+sum:1644

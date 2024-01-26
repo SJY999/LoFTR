@@ -7,6 +7,9 @@ We thank the authors for their execellent work.
 ------------------------------------------------------------------------
 """
 
+import sys
+sys.path.append('core')
+
 import os
 import argparse
 from pathlib import Path
@@ -14,6 +17,7 @@ import cv2
 import torch
 import numpy as np
 import matplotlib.cm as cm
+
 
 os.sys.path.append("../")  # Add the project directory
 from src.loftr import LoFTR, default_cfg
@@ -24,8 +28,10 @@ try:
 except:
     raise ImportError("This demo requires utils.py from SuperGlue, please use run_demo.sh to start this script.")
 
+from src.core.raft import RAFT
 
 torch.set_grad_enabled(False)
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
@@ -69,6 +75,10 @@ if __name__ == '__main__':
         '--top_k', type=int, default=2000, help="The max vis_range (please refer to the code).")
     parser.add_argument(
         '--bottom_k', type=int, default=0, help="The min vis_range (please refer to the code).")
+    parser.add_argument(
+        '--frame_interval', type=int, default=1, help="匹配两帧之间的间隔.")
+    parser.add_argument(
+        '--way', type=str, default='', help="匹配两帧之间的间隔.")
 
     opt = parser.parse_args()
     print(front_matter)
@@ -99,7 +109,7 @@ if __name__ == '__main__':
     # Configure I/O
     if opt.save_video:
         print('Writing video to loftr-matches.mp4...')
-        writer = cv2.VideoWriter('loftr-matches.mp4', cv2.VideoWriter_fourcc(*'mp4v'), 15, (640*2 + 10, 480))
+        writer = cv2.VideoWriter('loftr-matches_{}_{}_{}.mp4'.format(opt.frame_interval,opt.way,opt.input[-20:-4]), cv2.VideoWriter_fourcc(*'mp4v'), 15, (640*2 + 10, 480))
     if opt.save_input:
         print('Writing video to demo-input.mp4...')
         input_writer = cv2.VideoWriter('demo-input.mp4', cv2.VideoWriter_fourcc(*'mp4v'), 15, (640, 480))
@@ -113,7 +123,7 @@ if __name__ == '__main__':
     last_image_id = 0
     frame_tensor = frame2tensor(frame, device)
     last_data = {'image0': frame_tensor}
-    last_frame = frame
+    last_frame = frame  #当前帧记为上一帧
 
     if opt.output_dir is not None:
         print('==> Will write outputs to {}'.format(opt.output_dir))
@@ -137,7 +147,16 @@ if __name__ == '__main__':
     timer = AverageTimer()
     vis_range = [opt.bottom_k, opt.top_k]
 
+
+    sum_matches=0
+    output_file_path = 'result.txt'
+    s1='loftr-matches_{}_{}_{}.mp4'.format(opt.frame_interval,opt.way,opt.input[-30:-4])
+    with open(output_file_path, 'a') as f: f.write(f'{s1}\n')
+
     while True:
+
+        
+
         frame_id += 1
         frame, ret = vs.next_frame()
         if frame_id % opt.skip_frames != 0:
@@ -153,88 +172,109 @@ if __name__ == '__main__':
         timer.update('data')
         stem0, stem1 = last_image_id, vs.i - 1
 
-        frame_tensor = frame2tensor(frame, device)
-        last_data = {**last_data, 'image1': frame_tensor}
-        matcher(last_data)
+        if frame_id % opt.frame_interval==0:
+            frame_tensor = frame2tensor(frame, device)
+            last_data = {**last_data, 'image1': frame_tensor}
+            # print(last_data)
+            matcher(last_data)
 
-        total_n_matches = len(last_data['mkpts0_f'])
-        mkpts0 = last_data['mkpts0_f'].cpu().numpy()[vis_range[0]:vis_range[1]]
-        mkpts1 = last_data['mkpts1_f'].cpu().numpy()[vis_range[0]:vis_range[1]]
-        mconf = last_data['mconf'].cpu().numpy()[vis_range[0]:vis_range[1]]
+            # print("程序已经暂停，按回车键继续...")
+            # 使用 input 函数等待用户输入回车键
+            input()
 
-        # Normalize confidence.
-        if len(mconf) > 0:
-            conf_vis_min = 0.
-            conf_min = mconf.min()
-            conf_max = mconf.max()
-            mconf = (mconf - conf_vis_min) / (conf_max - conf_vis_min + 1e-5)
+            total_n_matches = len(last_data['mkpts0_f'])
+            mkpts0 = last_data['mkpts0_f'].cpu().numpy()[vis_range[0]:vis_range[1]]
+            mkpts1 = last_data['mkpts1_f'].cpu().numpy()[vis_range[0]:vis_range[1]]
+            mconf = last_data['mconf'].cpu().numpy()[vis_range[0]:vis_range[1]]
 
-        timer.update('forward')
-        alpha = 0
-        color = cm.jet(mconf, alpha=alpha)
+            with open(output_file_path, 'a') as f: f.write(f'{total_n_matches}  ')###？这里改过
+            sum_matches+=total_n_matches
+            print(last_data)
+            # Normalize confidence.
+            #不定义这两个会出现第一张匹配失败就挂掉的问题，但是好像和评估没啥关系
+            conf_min=0
+            conf_max=0
+            if len(mconf) > 0:
+                conf_vis_min = 0.
+                conf_min = mconf.min()
+                conf_max = mconf.max()
+                mconf = (mconf - conf_vis_min) / (conf_max - conf_vis_min + 1e-5)
 
-        text = [
-            f'LoFTR',
-            '# Matches (showing/total): {}/{}'.format(len(mkpts0), total_n_matches),
-        ]
-        small_text = [
-            f'Showing matches from {vis_range[0]}:{vis_range[1]}',
-            f'Confidence Range: {conf_min:.2f}:{conf_max:.2f}',
-            'Image Pair: {:06}:{:06}'.format(stem0, stem1),
-        ]
-        out = make_matching_plot_fast(
-            last_frame, frame, mkpts0, mkpts1, mkpts0, mkpts1, color, text,
-            path=None, show_keypoints=False, small_text=small_text)
+            timer.update('forward')
+            alpha = 0
+            color = cm.jet(mconf, alpha=alpha)
 
-        # Save high quality png, optionally with dynamic alpha support (unreleased yet).
-        # save_path = 'demo_vid/{:06}'.format(frame_id)
-        # make_matching_plot(
-        #     last_frame, frame, mkpts0, mkpts1, mkpts0, mkpts1, color, text,
-        #     path=save_path, show_keypoints=opt.show_keypoints, small_text=small_text)
+            text = [
+                f'LoFTR',
+                '# Matches (showing/total): {}/{}'.format(len(mkpts0), total_n_matches),
+            ]
+            small_text = [
+                f'Showing matches from {vis_range[0]}:{vis_range[1]}',
+                f'Confidence Range: {conf_min:.2f}:{conf_max:.2f}',
+                'Image Pair: {:06}:{:06}'.format(stem0, stem1),
+            ]
+            out = make_matching_plot_fast(
+                last_frame, frame, mkpts0, mkpts1, mkpts0, mkpts1, color, text,
+                path=None, show_keypoints=False, small_text=small_text)
 
-        if not opt.no_display:
-            if opt.save_video:
-                writer.write(out)
-            cv2.imshow('LoFTR Matches', out)
-            key = chr(cv2.waitKey(1) & 0xFF)
-            if key == 'q':
+            # Save high quality png, optionally with dynamic alpha support (unreleased yet).
+            # save_path = 'demo_vid/{:06}'.format(frame_id)
+            # make_matching_plot(
+            #     last_frame, frame, mkpts0, mkpts1, mkpts0, mkpts1, color, text,
+            #     path=save_path, show_keypoints=opt.show_keypoints, small_text=small_text)
+            
+            
+            last_data['image0'] = frame_tensor
+            last_frame = frame
+            last_image_id = (vs.i - 1)
+            frame_id_left = frame_id
+
+
+            if not opt.no_display:
                 if opt.save_video:
-                    writer.release()
-                if opt.save_input:
-                    input_writer.release()
-                vs.cleanup()
-                print('Exiting...')
-                break
-            elif key == 'n':  
-                last_data['image0'] = frame_tensor
-                last_frame = frame
-                last_image_id = (vs.i - 1)
-                frame_id_left = frame_id
-            elif key in ['d', 'f']:
-                if key == 'd':
-                    if vis_range[0] >= 0:
-                       vis_range[0] -= 200
-                       vis_range[1] -= 200
-                if key =='f':
-                    vis_range[0] += 200
-                    vis_range[1] += 200
-                print(f'\nChanged the vis_range to {vis_range[0]}:{vis_range[1]}')
-            elif key in ['c', 'v']:
-                if key == 'c':
-                    vis_range[1] -= 50
-                if key =='v':
-                    vis_range[1] += 50
-                print(f'\nChanged the vis_range[1] to {vis_range[1]}')
-        elif opt.output_dir is not None:
-            stem = 'matches_{:06}_{:06}'.format(stem0, stem1)
-            out_file = str(Path(opt.output_dir, stem + '.png'))
-            print('\nWriting image to {}'.format(out_file))
-            cv2.imwrite(out_file, out)
-        else:
-            raise ValueError("output_dir is required when no display is given.")
-        timer.update('viz')
-        timer.print()
-
+                    # print('保存结果')
+                    writer.write(out)
+                cv2.imshow('LoFTR Matches', out)
+                key = chr(cv2.waitKey(1) & 0xFF)
+                if key == 'q':     #退出
+                    if opt.save_video:
+                        writer.release()
+                    if opt.save_input:
+                        input_writer.release()
+                    vs.cleanup()
+                    print('Exiting...')
+                    break
+                elif key == 'n':   #改为当前帧
+                    last_data['image0'] = frame_tensor
+                    last_frame = frame
+                    last_image_id = (vs.i - 1)
+                    frame_id_left = frame_id
+                elif key in ['d', 'f']:
+                    if key == 'd':
+                        if vis_range[0] >= 0:
+                            vis_range[0] -= 200
+                            vis_range[1] -= 200
+                    if key =='f':
+                        vis_range[0] += 200
+                        vis_range[1] += 200
+                    print(f'\nChanged the vis_range to {vis_range[0]}:{vis_range[1]}')
+                elif key in ['c', 'v']:
+                    if key == 'c':
+                        vis_range[1] -= 50
+                    if key =='v':
+                        vis_range[1] += 50
+                    print(f'\nChanged the vis_range[1] to {vis_range[1]}')
+            elif opt.output_dir is not None:
+                stem = 'matches_{:06}_{:06}'.format(stem0, stem1)
+                out_file = str(Path(opt.output_dir, stem + '.png'))
+                print('\nWriting image to {}'.format(out_file))
+                cv2.imwrite(out_file, out)
+            else:
+                raise ValueError("output_dir is required when no display is given.")
+            timer.update('viz')
+            timer.print()
+    with open(output_file_path, 'a') as f: f.write(f'\nsum:{sum_matches}\n')
 
     cv2.destroyAllWindows()
     vs.cleanup()
+

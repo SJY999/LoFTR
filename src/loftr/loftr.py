@@ -8,7 +8,8 @@ from .loftr_module import LocalFeatureTransformer, FinePreprocess
 from .utils.coarse_matching import CoarseMatching
 from .utils.fine_matching import FineMatching
 
-
+from src.core.raft import RAFT
+from src.core.raft import raft_image
 class LoFTR(nn.Module):
     def __init__(self, config):
         super().__init__()
@@ -36,7 +37,8 @@ class LoFTR(nn.Module):
                 'mask1'(optional) : (torch.Tensor): (N, H, W)
             }
         """
-        # 1. Local Feature CNN
+        xmf, ymf = raft_image(data['image0'],data['image1'])
+        # 1. Local Fedature CNN
         data.update({
             'bs': data['image0'].size(0),
             'hw0_i': data['image0'].shape[2:], 'hw1_i': data['image1'].shape[2:]
@@ -55,8 +57,8 @@ class LoFTR(nn.Module):
 
         # 2. coarse-level loftr module
         # add featmap with positional encoding, then flatten it to sequence [N, HW, C]
-        feat_c0 = rearrange(self.pos_encoding(feat_c0), 'n c h w -> n (h w) c')
-        feat_c1 = rearrange(self.pos_encoding(feat_c1), 'n c h w -> n (h w) c')
+        feat_c0 = rearrange(self.pos_encoding(feat_c0,0,0), 'n c h w -> n (h w) c')
+        feat_c1 = rearrange(self.pos_encoding(feat_c1,xmf,ymf), 'n c h w -> n (h w) c')
 
         mask_c0 = mask_c1 = None  # mask is useful in training
         if 'mask0' in data:

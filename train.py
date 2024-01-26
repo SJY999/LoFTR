@@ -22,12 +22,7 @@ loguru_logger = get_rank_zero_only_logger(loguru_logger)
 
 def parse_args():
     # init a costum parser which will be added into pl.Trainer parser
-    # check documentation: https://pytorch-lightning.readthedocs.io/en/latest/common/trainer.html#trainer-flags
-    parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument(
-        'data_cfg_path', type=str, help='data config path')
-    parser.add_argument(
-        'main_cfg_path', type=str, help='main config path')
+    # check documentation: https:flp='main config path')
     parser.add_argument(
         '--exp_name', type=str, default='default_exp_name')
     parser.add_argument(
@@ -57,17 +52,17 @@ def parse_args():
 def main():
     # parse arguments
     args = parse_args()
-    rank_zero_only(pprint.pprint)(vars(args))
+    rank_zero_only(pprint.pprint)(vars(args))  #在分布式训练任务中log()函数仅在0号设备有效？？？？？？
 
     # init default-cfg and merge it with the main- and data-cfg
-    config = get_cfg_defaults()
-    config.merge_from_file(args.main_cfg_path)
+    config = get_cfg_defaults()    #设置
+    config.merge_from_file(args.main_cfg_path)  #添加.yaml修改参数用的
     config.merge_from_file(args.data_cfg_path)
-    pl.seed_everything(config.TRAINER.SEED)  # reproducibility
+    pl.seed_everything(config.TRAINER.SEED)  # reproducibility  复现
     # TODO: Use different seeds for each dataloader workers
     # This is needed for data augmentation
     
-    # scale lr and warmup-step automatically
+    # scale lr and warmup-step automatically 自动缩放lr和预热步骤
     args.gpus = _n_gpus = setup_gpus(args.gpus)
     config.TRAINER.WORLD_SIZE = _n_gpus * args.num_nodes
     config.TRAINER.TRUE_BATCH_SIZE = config.TRAINER.WORLD_SIZE * args.batch_size
@@ -78,30 +73,30 @@ def main():
     
     # lightning module
     profiler = build_profiler(args.profiler_name)
-    model = PL_LoFTR(config, pretrained_ckpt=args.ckpt_path, profiler=profiler)
+    model = PL_LoFTR(config, pretrained_ckpt=args.ckpt_path, profiler=profiler)  #///////////////////////////////////////////////////////////
     loguru_logger.info(f"LoFTR LightningModule initialized!")
     
     # lightning data
-    data_module = MultiSceneDataModule(args, config)
+    data_module = MultiSceneDataModule(args, config)  #//////////////////////////////////////////////////////////////////////////////////
     loguru_logger.info(f"LoFTR DataModule initialized!")
     
     # TensorBoard Logger
     logger = TensorBoardLogger(save_dir='logs/tb_logs', name=args.exp_name, default_hp_metric=False)
     ckpt_dir = Path(logger.log_dir) / 'checkpoints'
     
-    # Callbacks
-    # TODO: update ModelCheckpoint to monitor multiple metrics
+    # Callbacks 回调
+    # TODO: update ModelCheckpoint to monitor multiple metrics  更新ModelCheckpoint以监控多个指标   ..该回调函数将在每个epoch后保存模型到filepath
     ckpt_callback = ModelCheckpoint(monitor='auc@10', verbose=True, save_top_k=5, mode='max',
                                     save_last=True,
                                     dirpath=str(ckpt_dir),
                                     filename='{epoch}-{auc@5:.3f}-{auc@10:.3f}-{auc@20:.3f}')
-    lr_monitor = LearningRateMonitor(logging_interval='step')
+    lr_monitor = LearningRateMonitor(logging_interval='step')   #记录学习率的变化，并绘制到tensorboard中
     callbacks = [lr_monitor]
     if not args.disable_ckpt:
         callbacks.append(ckpt_callback)
     
     # Lightning Trainer
-    trainer = pl.Trainer.from_argparse_args(
+    trainer = pl.Trainer.from_argparse_args(  #定义trainer接口
         args,
         plugins=DDPPlugin(find_unused_parameters=False,
                           num_nodes=args.num_nodes,
@@ -116,7 +111,7 @@ def main():
         profiler=profiler)
     loguru_logger.info(f"Trainer initialized!")
     loguru_logger.info(f"Start training!")
-    trainer.fit(model, datamodule=data_module)
+    trainer.fit(model, datamodule=data_module)  #训练和验证
 
 
 if __name__ == '__main__':

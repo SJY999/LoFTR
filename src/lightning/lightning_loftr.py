@@ -10,7 +10,6 @@ import pytorch_lightning as pl
 from matplotlib import pyplot as plt
 
 from src.loftr import LoFTR
-from src.loftr.utils.supervision import compute_supervision_coarse, compute_supervision_fine
 from src.losses.loftr_loss import LoFTRLoss
 from src.optimizers import build_optimizer, build_scheduler
 from src.utils.metrics import (
@@ -24,7 +23,7 @@ from src.utils.misc import lower_config, flattenList
 from src.utils.profiler import PassThroughProfiler
 
 
-class PL_LoFTR(pl.LightningModule):
+class PL_LoFTR(pl.LightningModule):  # 没有forward为啥
     def __init__(self, config, pretrained_ckpt=None, profiler=None, dump_dir=None):
         """
         TODO:
@@ -35,12 +34,12 @@ class PL_LoFTR(pl.LightningModule):
         self.config = config  # full config
         _config = lower_config(self.config)
         self.loftr_cfg = lower_config(_config['loftr'])
-        self.profiler = profiler or PassThroughProfiler()
+        self.profiler = profiler or PassThroughplProfiler()
         self.n_vals_plot = max(config.TRAINER.N_VAL_PAIRS_TO_PLOT // config.TRAINER.WORLD_SIZE, 1)
 
         # Matcher: LoFTR
-        self.matcher = LoFTR(config=_config['loftr'])
-        self.loss = LoFTRLoss(_config)
+        self.matcher = LoFTR(config=_config['loftr'])  #//////////////////////////////////////////////
+        self.loss = LoFTRLoss(_config)  #///////////////////////////////////////
 
         # Pretrained weights
         if pretrained_ckpt:
@@ -51,7 +50,7 @@ class PL_LoFTR(pl.LightningModule):
         # Testing
         self.dump_dir = dump_dir
         
-    def configure_optimizers(self):
+    def configure_optimizers(self):  #自动的 优化器相关部分
         # FIXME: The scheduler did not work properly when `--resume_from_checkpoint`
         optimizer = build_optimizer(self, self.config)
         scheduler = build_scheduler(self.config, optimizer)
@@ -79,7 +78,7 @@ class PL_LoFTR(pl.LightningModule):
         optimizer.step(closure=optimizer_closure)
         optimizer.zero_grad()
     
-    def _trainval_inference(self, batch):
+    def _trainval_inference(self, batch):  #这个被调用啦
         with self.profiler.profile("Compute coarse supervision"):
             compute_supervision_coarse(batch, self.config)
         
@@ -92,7 +91,7 @@ class PL_LoFTR(pl.LightningModule):
         with self.profiler.profile("Compute losses"):
             self.loss(batch)
     
-    def _compute_metrics(self, batch):
+    def _compute_metrics(self, batch):  #这个被调用啦
         with self.profiler.profile("Copmute metrics"):
             compute_symmetrical_epipolar_errors(batch)  # compute epi_errs for each match
             compute_pose_errors(batch, self.config)  # compute R_errs, t_errs, pose_errs for each pair
@@ -109,7 +108,7 @@ class PL_LoFTR(pl.LightningModule):
             ret_dict = {'metrics': metrics}
         return ret_dict, rel_pair_names
     
-    def training_step(self, batch, batch_idx):
+    def training_step(self, batch, batch_idx):  #自动训练 模型训练逻辑
         self._trainval_inference(batch)
         
         # logging
@@ -125,7 +124,7 @@ class PL_LoFTR(pl.LightningModule):
 
             # figures
             if self.config.TRAINER.ENABLE_PLOTTING:
-                compute_symmetrical_epipolar_errors(batch)  # compute epi_errs for each match
+                compute_symmetrical_epipolar_errors(batch)  # compute epi_errs for each match  计算每个匹配的epi_errs 
                 figures = make_matching_figures(batch, self.config, self.config.TRAINER.PLOT_MODE)
                 for k, v in figures.items():
                     self.logger.experiment.add_figure(f'train_match/{k}', v, self.global_step)
@@ -139,7 +138,7 @@ class PL_LoFTR(pl.LightningModule):
                 'train/avg_loss_on_epoch', avg_loss,
                 global_step=self.current_epoch)
     
-    def validation_step(self, batch, batch_idx):
+    def validation_step(self, batch, batch_idx):  #自动验证  模型训练逻辑
         self._trainval_inference(batch)
         
         ret_dict, _ = self._compute_metrics(batch)
@@ -155,7 +154,7 @@ class PL_LoFTR(pl.LightningModule):
             'figures': figures,
         }
         
-    def validation_epoch_end(self, outputs):
+    def validation_epoch_end(self, outputs):  #如果需要对每个validation_step（）的所有输出执行某些操作，请重写validation _epoch_end（）方法。注意，此方法在training_epoch_end（）之前调用
         # handle multiple validation sets
         multi_outputs = [outputs] if not isinstance(outputs[0], (list, tuple)) else outputs
         multi_val_metrics = defaultdict(list)
@@ -202,7 +201,7 @@ class PL_LoFTR(pl.LightningModule):
             # log on all ranks for ModelCheckpoint callback to work properly
             self.log(f'auc@{thr}', torch.tensor(np.mean(multi_val_metrics[f'auc@{thr}'])))  # ckpt monitors on this
 
-    def test_step(self, batch, batch_idx):
+    def test_step(self, batch, batch_idx): #模型训练逻辑
         with self.profiler.profile("LoFTR"):
             self.matcher(batch)
 
